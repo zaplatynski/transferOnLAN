@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="TransferOnLAN" default="all" basedir="..">
+    <!--  Copyright (c) 2011-2013 Arnaud FRANÇOIS -->
+
+    <property name="version" value="0.6.1" />
+    <property name="src" location="src" />
+    <property name="build" location="build-${version}" />
+    <property name="jar" location="${ant.project.name}.jar" />
+    <property name="livrable" location="dist" />
+    
+
+    <!-- ******************** cleaning ******************** -->
+    <target name="cleaning" description="cleaning">
+        <delete dir="${build}" />
+        <delete dir="${livrable}" />
+        <delete file="${jar}" />
+        <delete file="${ant.project.name}-${version}.tar.gz" />
+        <delete file="${ant.project.name}-${version}-src.tar.gz" />
+    </target>
+    
+    <!-- ******************** initialization ******************** -->
+    <target name="init" depends="cleaning" description="initialization">
+        <mkdir dir="${build}" />
+    </target>
+    
+    <!-- ******************** source compilation ******************** -->
+    <target name="compile" depends="init" description="source compilation">
+        <!-- compilation -->
+        <javac srcdir="${src}" destdir="${build}" source="1.6" />
+        
+        <!-- copie des fichiers et dossiers nécessaires --> 
+        <copy todir="${build}/images">
+            <fileset dir="${src}/images"/>
+        </copy>
+        <copy todir="${build}/lang">
+            <fileset dir="${src}/lang" />
+        </copy>        
+    </target>
+
+    <!-- ******************** building of jar ******************** -->
+    <target name="jar" depends="compile" description="building of jar">
+        <jar jarfile="${jar}">
+            <fileset dir="${build}" />
+            <manifest>
+                <attribute name="Main-Class" value="transfer_on_lan.Main" />
+                <attribute name="Class-Path" value="." />
+            </manifest>
+        </jar>
+    </target>    
+    
+    <!-- ******************** création du livrable ******************** -->
+    <target name="livrable" depends="jar" description="création du livrable">
+        <!-- copie des fichiers et dossiers nécessaires --> 
+        <copy file="${jar}" todir="${livrable}"/>
+        
+        <copy file="${src}/CHANGES" todir="${livrable}"/>
+        <copy file="${src}/COPYING" todir="${livrable}"/>        
+        <copy file="${src}/README" todir="${livrable}"/>
+        <copy file="${src}/THIRDPARTY-LICENSE-NUVOLA_ICON_THEME" todir="${livrable}"/>
+        <copy file="${src}/TRANSLATORS" todir="${livrable}"/>
+
+        <copy file="${src}/TransferOnLAN.sh" todir="${livrable}"/>
+        <copy file="${src}/TransferOnLAN.png" todir="${livrable}"/>
+        <copy file="${src}/TransferOnLAN.ico" todir="${livrable}"/>        
+    </target>
+    
+    <!-- ******************** compression of sources ******************** -->
+    <target name="tar_src" depends="livrable"  description="compression des source">
+        <tar destfile="${ant.project.name}-${version}-src.tar.gz" longfile="gnu" compression="gzip">
+            <tarfileset dir="${src}" prefix="${ant.project.name}-${version}-src" >
+                <include name="**"/>
+             </tarfileset>         
+        </tar>
+    </target>
+
+    <!-- ******************** compression du livrable ******************** -->
+    <target name="tar" depends="livrable"  description="compression du livrable">
+        <tar destfile="${ant.project.name}-${version}.tar.gz" longfile="gnu" compression="gzip">
+            <tarfileset dir="${livrable}" filemode="755" prefix="${ant.project.name}-${version}">
+              <include name="TransferOnLAN.sh"/>
+            </tarfileset>   
+            <tarfileset dir="${livrable}" prefix="${ant.project.name}-${version}">
+              <include name="**"/>
+              <exclude name="TransferOnLAN.sh"/>
+            </tarfileset>         
+        </tar>
+    </target>
+    
+    <!-- ******************** all ******************** -->
+    <target name="all" depends="tar, tar_src" description="fabrique l'ensemble du projet" >
+        <delete dir="${build}" />
+        <delete dir="${livrable}" />
+        <delete file="${jar}" />    
+    </target>
+</project>

@@ -1,0 +1,88 @@
+Changes in Transfer on LAN
+
+
+version 0.4.3 :
+  - translation in german
+  - improvement of language change
+  - faster detection of users
+  - fixed a bug that prevented the display of the user avatar
+
+
+version 0.4.4 :
+  - fix locale problem (issue 2)
+  - automatically accept transfers
+  - better display time of transfers
+  - better display of volumes of transfers
+
+
+version 0.4.5 :
+  - better detection of disconnected users
+  - addition of tab "Receptions"
+  - improvement of transfer display
+
+
+version 0.4.6 :
+  - allow the transfer of hidden files/folders
+
+
+version 0.4.7 :
+  - allow use public network addresses
+
+
+version 0.4.8 :
+  - allow to be invisible by others users
+  - allow to use the system tray
+  - better display of sendings and receptions
+  - ban several launches of the application
+
+
+version 0.4.9 :
+  - display flow rate
+  - allow to remove sendings from list of sendings
+  - allow to remove receptions from list of receptions
+
+
+version 0.4.10 :
+  - fix flow rate display bug
+  - progress bars more fluid
+
+
+version 0.4.11 :
+  - allow to open folder of receptions
+  - remove 127.0.0.1 of the list of IP addresses  
+  - fix some bugs
+
+
+version 0.4.12 :
+  - new icon
+  - user list is sorted in alphabetical order
+  - links in the "about" tab
+  - the tab of "Preferences" is enhanced
+
+
+version 0.4.12.1 :
+  - spanish translation
+ 
+
+version 0.5 :
+  - progress bars are more fluid
+  - time of the end of transfer is showed in the sending list and in the reception list
+  - the user name is checked (the length is limited to 30 characters, the character ";" is forbidden)
+  - the size of the avatar file is checked (100000 bytes maximum)
+  - transfer is impossible if there is not enough free disk space
+  - may work better with Mac OS X (need testing)
+  - the application needs Java 7
+
+
+version 0.5.1 :
+  - filter the list of users by the name or the IP address
+  - possibility to hide some tabs
+
+
+version 0.6 :
+  - the receiver can cancel a transfer
+  - norwegian translation
+  - fix a bug in user display
+
+version 0.6.1 :
+  - the port number can be changed
